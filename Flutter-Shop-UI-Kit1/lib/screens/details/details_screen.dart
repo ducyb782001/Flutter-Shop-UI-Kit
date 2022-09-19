@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stylish/constants.dart';
+import 'package:stylish/screens/home/home_screen.dart';
 
 import '../../models/Product.dart';
 import 'components/color_dot.dart';
@@ -10,6 +11,7 @@ class DetailsScreen extends StatelessWidget {
   final Product product;
   @override
   Widget build(BuildContext context) {
+    final counter = MyInheritedWidget.of(context)?.myData ?? "fail";
     return Scaffold(
       backgroundColor: product.bgColor,
       appBar: AppBar(
@@ -64,10 +66,11 @@ class DetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: defaultPadding),
+                    Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: defaultPadding),
                       child: Text(
-                          "A Bla bllo abcdxyz A Bla bla shirt blo blo abcdxyzbcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyzA Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyzA Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz"),
+                          'Data la: $counter A Bla bllo abcdxyz A Bla bla shirt blo blo abcdxyzbcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyzA Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyzA Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz A Bla bla shirt blo blo abcdxyz'),
                     ),
                     const Text(
                       "Colors",

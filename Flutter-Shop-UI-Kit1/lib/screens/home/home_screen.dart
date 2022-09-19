@@ -11,12 +11,31 @@ import 'components/product_cart.dart';
 import 'components/search_form.dart';
 import 'components/section_title.dart';
 
+class MyInheritedWidget extends InheritedWidget {
+  MyInheritedWidget({required Widget child, this.myData}) : super(child: child);
+  final String? myData;
+  @override
+  bool updateShouldNotify(MyInheritedWidget oldWidget) {
+    return true;
+  }
+
+  static MyInheritedWidget? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<MyInheritedWidget>();
+  }
+}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: "Add new",
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -39,40 +58,54 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: SvgPicture.asset("assets/icons/Notification.svg"),
-          )
+          ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(defaultPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Explore",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(fontWeight: FontWeight.w500, color: Colors.black),
-            ),
-            const Text(
-              "Best outfits for you",
-              style: TextStyle(fontSize: 18),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: defaultPadding),
-              child: SearchForm(),
-            ),
-            const Categories(),
-            const SizedBox(
-              height: defaultPadding,
-            ),
-            const NewArrival(),
-            const SizedBox(
-              height: defaultPadding,
-            ),
-            const Popular(),
-          ],
-        ),
+      body: MyInheritedWidget(
+        child: const MyBodyWidget(),
+        myData: "abcd",
+      ),
+    );
+  }
+}
+
+class MyBodyWidget extends StatelessWidget {
+  const MyBodyWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(defaultPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Explore",
+            style: Theme.of(context)
+                .textTheme
+                .headline4!
+                .copyWith(fontWeight: FontWeight.w500, color: Colors.black),
+          ),
+          const Text(
+            "Best outfits for you",
+            style: TextStyle(fontSize: 18),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: defaultPadding),
+            child: SearchForm(),
+          ),
+          const Categories(),
+          const SizedBox(
+            height: defaultPadding,
+          ),
+          const NewArrival(),
+          const SizedBox(
+            height: defaultPadding,
+          ),
+          const Popular(),
+        ],
       ),
     );
   }
